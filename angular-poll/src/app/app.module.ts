@@ -6,6 +6,7 @@ import { NewPollBtnComponent } from './new-poll-btn/new-poll-btn.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NewPollFormComponent } from './new-poll-form/new-poll-form.component'
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: 'home',
@@ -33,7 +34,8 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
