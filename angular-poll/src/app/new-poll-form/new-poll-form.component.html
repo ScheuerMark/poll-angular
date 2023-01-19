@@ -1,10 +1,12 @@
 <div class="create-poll-form">
     <div class="create-poll-container">
-        <input type="text" placeholder="Title" class="poll-title">
-        <input type="text" placeholder="Option" class="poll-element">
-        <input type="text" placeholder="Option" class="poll-element">
-        <input type="text" placeholder="Option" class="poll-element">
-        <button class="poll-create-btn">Create</button>
+        <input type="text" placeholder="Title" class="poll-title"  [(ngModel)]="pollForm.title">
+        <div *ngFor="let option of pollForm.options; let i = index">
+            <input type="text" placeholder="Option" class="poll-element"
+            [(ngModel)]="option.value">
+        </div>
+        <button (click)="addOption()" class="poll-create-btn">Add option</button>
+        <button (click)="createPoll()" class="poll-create-btn">Create</button>
     </div>
 </div>
 

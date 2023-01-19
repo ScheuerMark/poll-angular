@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PollForm, option } from './pollform';
 
 @Component({
   selector: 'app-new-poll-form',
@@ -6,5 +7,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./new-poll-form.component.css']
 })
 export class NewPollFormComponent {
+    pollForm : PollForm = {
+      title : "",
+      options: [
+        {value: ""},
+        {value: ""},
+        {value: ""}
+    ]
+    }
+
+    addOption() {
+      
+      this.pollForm.options.push({value: ""});
+    }
+
+    createPoll(){
+      console.log(this.pollForm);
+    }
+
 
 }
