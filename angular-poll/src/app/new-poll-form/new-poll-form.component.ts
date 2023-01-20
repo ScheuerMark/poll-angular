@@ -16,14 +16,17 @@ export class NewPollFormComponent {
     ]
     }
 
-    addOption() {
-      
+    addOption() { 
       this.pollForm.options.push({value: ""});
+    }
+    removeOption(index : number){
+      this.pollForm.options.splice(index,1);
     }
 
     createPoll(){
       console.log(this.pollForm);
     }
+
 
 
 }

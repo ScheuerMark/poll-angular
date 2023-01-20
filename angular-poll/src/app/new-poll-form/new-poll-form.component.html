@@ -4,8 +4,9 @@
         <div *ngFor="let option of pollForm.options; let i = index">
             <input type="text" placeholder="Option" class="poll-element"
             [(ngModel)]="option.value">
+            <a (click)="removeOption(i)" class="poll-remove-option">-</a>
         </div>
-        <button (click)="addOption()" class="poll-create-btn">Add option</button>
+        <a (click)="addOption()" class="poll-add-option">+</a>
         <button (click)="createPoll()" class="poll-create-btn">Create</button>
     </div>
 </div>

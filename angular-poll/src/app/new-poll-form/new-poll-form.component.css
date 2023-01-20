@@ -8,7 +8,6 @@
 
 .create-poll-container
 {
-    text-align: center;
     background-color: rgba(210, 77, 87,0.4);
     padding: 1rem;
     flex-wrap:wrap;
@@ -19,9 +18,9 @@
 
 .poll-title, .poll-element{
     padding: 0.5rem;
-    width: 36.5rem;
     color: black;
     background-color: rgba(245, 222, 179, 0.795);
+    
     
 }
 
@@ -29,9 +28,11 @@
     font-size: 3rem;
     text-align: center;
     margin-bottom: 1rem;
+    width: 36.5rem;
 }
 .poll-element{
     font-size: 2rem;
+    width: 35rem;
 }
 
 .poll-create-btn {
@@ -69,4 +70,23 @@
 
 .poll-create-btn:active {
   opacity: .5;
+}
+
+.poll-add-option{
+  font-size: 2rem;
+  font-weight: bold;
+  margin-left: 37rem;
+  cursor: pointer;
+  color: white;
+}
+.poll-remove-option{
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 1rem;
+  color: white;
+}
+
+.poll-remove-option:hover, .poll-add-option:hover{
+  color: black;
 }
