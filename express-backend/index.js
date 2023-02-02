@@ -9,7 +9,7 @@ const pool = new Pool({
   host: 'dpg-cfe1knpmbjsrs6a8p7l0-a',
   database: 'poll',
   password: 'dVVkn1ghdJUrMd5TN3hF8zYdXyNaTLfr',
-  port: 5432
+  port: 5432,
 })
 const app = express();
 
@@ -97,12 +97,12 @@ app.put("/api/poll/:id/vote", async (req, res) => {
 
   try {
     const pollIdResult = await runQuery(`
-      SELECT poll_id FROM Votes WHERE id Like ${optionId}
+      SELECT poll_id FROM Votes WHERE id = ${optionId}
     `);
     const pollId = pollIdResult[0].poll_id;
 
     const ipExistsResult = await runQuery(`
-      SELECT COUNT(*) FROM IpAddresses WHERE poll_id Like ${pollId} AND ip_address Like '${ipAddress}'
+      SELECT COUNT(*) FROM IpAddresses WHERE poll_id = ${pollId} AND ip_address = '${ipAddress}'
     `);
     const ipExists = ipExistsResult[0][""];
 
