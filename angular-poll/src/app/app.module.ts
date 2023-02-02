@@ -8,6 +8,7 @@ import { NewPollFormComponent } from './new-poll-form/new-poll-form.component'
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PollVoteFormComponent } from './poll-vote-form/poll-vote-form.component';
+import { PollResultComponent } from './poll-result/poll-result.component';
 
 const routes: Routes = [
   { path: 'home',
@@ -23,6 +24,10 @@ const routes: Routes = [
         {
           path:'poll/:id',
           component: PollVoteFormComponent
+        },
+        {
+          path:'poll-result/:id',
+          component: PollResultComponent
         }
     ] ,
     component:HomeComponent
@@ -36,7 +41,8 @@ const routes: Routes = [
     NewPollBtnComponent,
     HomeComponent,
     NewPollFormComponent,
-    PollVoteFormComponent
+    PollVoteFormComponent,
+    PollResultComponent
   ],
   imports: [
     BrowserModule,

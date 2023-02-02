@@ -3,11 +3,9 @@
         <p class="poll-title" [textContent]="pollForm.title"></p>
         <div *ngFor="let option of pollForm.options; let i = index">
             <div class="radiobtn">
-            <input type="radio" name="rad" [(ngModel)]="selectedOptionId" [value]="option.id">
             <label [htmlFor]="option.id" [textContent]="option.value"></label>
+            <p class="vote-number" [textContent]="option.votes"></p>
             </div>
         </div>
-        <button (click)="sendVote()" class="poll-vote-btn poll-vote-btn-bg">Vote</button>
-        <button [routerLink]="'/home/poll-result/'+pollForm.id" class="poll-result-btn poll-vote-btn">Results</button>
     </div>
 </div>

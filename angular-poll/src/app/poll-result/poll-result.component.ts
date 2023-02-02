@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PollForm } from '../new-poll-form/pollform';
 import { PollService } from '../services/poll.service';
 
 @Component({
-  selector: 'app-poll-vote-form',
-  templateUrl: './poll-vote-form.component.html',
-  styleUrls: ['./poll-vote-form.component.css']
+  selector: 'app-poll-result',
+  templateUrl: './poll-result.component.html',
+  styleUrls: ['./poll-result.component.css']
 })
-export class PollVoteFormComponent implements OnInit {
+export class PollResultComponent implements OnInit {
   pollForm : PollForm;
   selectedOptionId: number = -1;
 
   constructor(
     private pollService: PollService,
     private route: ActivatedRoute,
-    private _router: Router,
     ) 
     {
       this.pollForm = {
@@ -38,6 +37,6 @@ export class PollVoteFormComponent implements OnInit {
 
   sendVote(){
     this.pollService.increaseVote(this.selectedOptionId).subscribe(result =>
-      this._router.navigate([`/home/poll-result/${this.pollForm.id}`]));
+      console.log(result));
   }
 }

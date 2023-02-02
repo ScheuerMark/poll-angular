@@ -1,0 +1,58 @@
+.vote-poll-form{
+    width: 40rem;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin: -10rem 0 0 -20rem;
+}
+
+.vote-poll-container
+{
+    background-color: rgba(210, 77, 87,0.4);
+    padding: 1rem;
+    flex-wrap:wrap;
+    border-radius: 1rem;
+    mix-blend-mode:hard-light;
+    overflow: hidden;
+}
+
+.poll-title, .radiobtn label{
+    padding: 0.5rem;
+    color: black;
+    background-color: rgba(245, 222, 179, 0.795);
+    display: block;
+    
+}
+
+.poll-title{
+    margin-top: 0;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    width: 36.5rem;
+}
+.radiobtn label{
+    font-size: 2rem;
+    width: 36.5rem;
+    margin-bottom: 2px;
+}
+.radiobtn{
+    position: relative;
+}
+.vote-number{
+    font-size: 2rem;
+    display: inline;
+    position: absolute;
+    bottom: -1.5rem;
+    left: 35rem;
+}
+
+
+
+
+
+
+
+
+  
+
