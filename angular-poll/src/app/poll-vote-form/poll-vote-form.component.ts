@@ -10,6 +10,7 @@ import { PollService } from '../services/poll.service';
 })
 export class PollVoteFormComponent implements OnInit {
   pollForm : PollForm;
+  selectedOptionId: number = -1;
 
   constructor(
     private pollService: PollService,
@@ -25,10 +26,17 @@ export class PollVoteFormComponent implements OnInit {
       };
     }
 
+  
+
   ngOnInit() {
     let id = this.route.snapshot.params['id'];
     this.pollService.getPoll(id).subscribe(poll => {
       this.pollForm = poll as PollForm;
     });
+  }
+
+  sendVote(){
+    this.pollService.increaseVote(this.selectedOptionId).subscribe(result =>
+      console.log(result));
   }
 }

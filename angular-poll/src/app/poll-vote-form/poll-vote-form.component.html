@@ -3,10 +3,10 @@
         <p class="poll-title" [textContent]="pollForm.title"></p>
         <div *ngFor="let option of pollForm.options; let i = index">
             <div class="radiobtn">
-            <input type="radio" name="rad" [value]="option.value">
-            <label [htmlFor]="option.value" [textContent]="option.value"></label>
+            <input type="radio" name="rad" [(ngModel)]="selectedOptionId" [value]="option.id">
+            <label [htmlFor]="option.id" [textContent]="option.value"></label>
             </div>
         </div>
-        <button class="poll-vote-btn">Vote</button>
+        <button (click)="sendVote()" class="poll-vote-btn">Vote</button>
     </div>
 </div>

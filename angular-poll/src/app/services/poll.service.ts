@@ -15,4 +15,7 @@ export class PollService {
   getPoll(id: number) {
     return this.http.get(`http://localhost:3000/api/poll/${id}`);
   }
+  increaseVote(optionId: number) {
+    return this.http.put(`http://localhost:3000/api/poll/${optionId}/vote`, {});
+  }
 }
