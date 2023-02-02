@@ -5,8 +5,14 @@
     "node": ">=18 <19"
   },
   "scripts": {
-    "start": "cd express-backend/ && npm start",
+    "ng": "ng",
+    "start": "concurrently \"npm run serve-api\" \"npm run serve\"",
+    "serve": "cd angular-poll/ && ng serve --proxy-config proxy.conf.json",
+    "serve-api": "cd express-backend/ && npm start",
     "prebuild": "cd express-backend/ && npm run build",
     "build": "cd angular-poll/ && npm run build"
+  },
+  "dependencies": {
+    "concurrently": "^7.6.0"
   }
 }
