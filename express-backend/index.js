@@ -95,14 +95,33 @@ app.post("/api/new-poll", async (req, res) => {
 
 app.put("/api/poll/:id/vote", async (req, res) => {
   const optionId = req.params.id;
+  const ipAddress = req.ip;
 
   try {
-    await runQuery(`
-      UPDATE Votes SET votes = votes + 1
-      WHERE id = ${optionId}
+    const pollIdResult = await runQuery(`
+      SELECT poll_id FROM Votes WHERE id Like ${optionId}
     `);
+    const pollId = pollIdResult[0].poll_id;
 
-    return res.status(200).json({ message: 'Vote counted' });
+    const ipExistsResult = await runQuery(`
+      SELECT COUNT(*) FROM IpAddresses WHERE poll_id Like ${pollId} AND ip_address Like '${ipAddress}'
+    `);
+    const ipExists = ipExistsResult[0][""];
+
+    if (ipExists > 0) {
+      return res.status(400).json({ error: 'This IP address has already voted for this poll' });
+    } else {
+      await runQuery(`
+        INSERT INTO IpAddresses (poll_id, ip_address)
+        VALUES (${pollId}, '${ipAddress}')
+      `);
+      await runQuery(`
+        UPDATE Votes SET votes = votes + 1
+        WHERE id = ${optionId}
+      `);
+
+      return res.status(200).json({ message: 'Vote counted' });
+    }
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
