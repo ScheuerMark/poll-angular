@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PollForm, option } from './pollform';
+import { PollForm, option, PollResponse } from './pollform';
+import { PollService } from '../services/poll.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-poll-form',
@@ -7,25 +9,39 @@ import { PollForm, option } from './pollform';
   styleUrls: ['./new-poll-form.component.css']
 })
 export class NewPollFormComponent {
-    pollForm : PollForm = {
-      title : "",
-      options: [
-        {value: ""},
-        {value: ""},
-        {value: ""}
-    ]
-    }
+  constructor(
+    private pollService: PollService,
+    private _router: Router
+    ) {}
 
-    addOption() { 
-      this.pollForm.options.push({value: ""});
-    }
-    removeOption(index : number){
-      this.pollForm.options.splice(index,1);
-    }
+  pollForm : PollForm = {
+    title : "",
+    options: [
+      {value: ""},
+      {value: ""},
+      {value: ""}
+  ]
+  }
 
-    createPoll(){
-      console.log(this.pollForm);
-    }
+  addOption() { 
+    this.pollForm.options.push({value: ""});
+  }
+  removeOption(index : number){
+    this.pollForm.options.splice(index,1);
+  }
+
+  createPoll() {
+    this.pollService.createPoll(this.pollForm).subscribe(
+      (response) => {     
+        let pollId =(response as PollResponse).pollId           
+        console.log('Poll created successfully with id:', pollId);
+        this._router.navigate([`/home/poll/${pollId}`]);
+      },
+      (error) => {
+        console.error('Error creating poll:', error);
+      }
+    );
+  }
 
 
 

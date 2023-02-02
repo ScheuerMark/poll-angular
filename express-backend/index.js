@@ -9,6 +9,12 @@ const app = express();
 
 app.use(express.json());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 const config = {
     server: "(localdb)\\MSSQLLocalDB",
     database: "Poll",
@@ -30,11 +36,33 @@ try {
 }
 
 
-app.get("/asd", (req, res) => {
-    res.send("this is working");
+app.get("/api/poll/:id", async(req, res) => {
+  const pollId = req.params.id;
+  
+  try {
+    const result = await runQuery(`
+      SELECT title FROM Polls WHERE id = ${pollId}
+    `);
+    
+    const title = result[0].title;
+    const options = await runQuery(`
+      SELECT id, name, votes FROM Votes WHERE poll_id = ${pollId}
+    `);
+    
+    const poll= {
+      title: title,
+      id:pollId,
+      options: options.map(option => ({value: option.name, votes: option.votes, id: option.id}))
+      
+    };
+    
+    return res.status(200).json(poll);
+  } catch (err) {
+    return res.status(500).json({error: err.message});
+  }
 });
 
-app.post("/new-poll", async (req, res) => {
+app.post("/api/new-poll", async (req, res) => {
     const title = req.body.title;
     const options = req.body.options;
 
@@ -57,7 +85,7 @@ app.post("/new-poll", async (req, res) => {
           `);
         }
         
-        return res.status(201).json({ message: 'Poll added successfully' });
+        return res.status(201).json({ message: 'Poll added successfully', pollId: pollId });
       } catch (err) {
         return res.status(500).json({ error: err.message });
       }
