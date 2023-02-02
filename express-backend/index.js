@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const _ = require("lodash");
 const { v4 : uuid } = require("uuid");
-const sql = require('mssql/msnodesqlv8');
+const sql = require('mssql');
 
 const app = express();
 
@@ -19,7 +19,6 @@ app.use(function(req, res, next) {
 const config = {
     server: "(localdb)\\MSSQLLocalDB",
     database: "Poll",
-    driver: 'msnodesqlv8',
     options: {
       trustedConnection: true,
     }
