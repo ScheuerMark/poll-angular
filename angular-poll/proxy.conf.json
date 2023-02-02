@@ -1,6 +1,6 @@
 {
     "/new-poll": {
-      "target": "http://localhost:3000",
+      "target": "https://poll-backend.onrender.com",
       "secure": false,
       "changeOrigin": true
     }

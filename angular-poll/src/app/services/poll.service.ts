@@ -6,16 +6,17 @@ import { PollForm } from '../new-poll-form/pollform';
   providedIn: 'root'
 })
 export class PollService {
+  baseUrl = "https://poll-backend.onrender.com"
 
   constructor(private http: HttpClient) { }
 
   createPoll(pollForm: PollForm) {
-    return this.http.post('http://localhost:3000/api/new-poll', pollForm);
+    return this.http.post(`${this.baseUrl}/api/new-poll`, pollForm);
   }
   getPoll(id: number) {
-    return this.http.get(`http://localhost:3000/api/poll/${id}`);
+    return this.http.get(`${this.baseUrl}/api/poll/${id}`);
   }
   increaseVote(optionId: number) {
-    return this.http.put(`http://localhost:3000/api/poll/${optionId}/vote`, {});
+    return this.http.put(`${this.baseUrl}/api/poll/${optionId}/vote`, {});
   }
 }
