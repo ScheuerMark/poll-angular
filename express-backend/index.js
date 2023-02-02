@@ -3,8 +3,15 @@ const express = require("express");
 const cors = require("cors");
 const _ = require("lodash");
 const { v4 : uuid } = require("uuid");
-const sql = require('mssql');
-
+const Pool = require('pg').Pool
+const pool = new Pool({
+  user: 'scheuer',
+  host: 'dpg-cfe1knpmbjsrs6a8p7l0-a',
+  database: 'poll',
+  password: 'dVVkn1ghdJUrMd5TN3hF8zYdXyNaTLfr',
+  port: 5432,
+  ssl: true
+})
 const app = express();
 
 app.use(express.json());
@@ -16,23 +23,16 @@ app.use(function(req, res, next) {
     next();
   });
 
-const config = {
-    server: "(localdb)\\MSSQLLocalDB",
-    database: "Poll",
-    options: {
-      trustedConnection: true,
+  async function runQuery(query) {
+    try {
+        const client = await pool.connect();
+        const result = await client.query(query);
+        client.release();
+        return result.rows;
+    } catch (err) {
+        console.error('SQL error:', err);
+        return [];
     }
-  };
-
-async function runQuery(query) {
-try {
-    const pool = await sql.connect(config);
-    const result = await pool.request().query(query);
-    return result.recordset;
-} catch (err) {
-    console.error('SQL error:', err);
-    return [];
-}
 }
 
 
@@ -71,10 +71,10 @@ app.post("/api/new-poll", async (req, res) => {
     }
     try {      
         const result = await runQuery(`
-          INSERT INTO Polls (title)
-          VALUES ('${title}');
-          SELECT SCOPE_IDENTITY() AS id;
-        `);
+        INSERT INTO Polls (title)
+        VALUES ('${title}')
+        RETURNING id;
+      `);
         
         const pollId = result[0].id;
         
