@@ -12,6 +12,7 @@ app.use(express.json());
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT");
     next();
   });
 
@@ -90,6 +91,21 @@ app.post("/api/new-poll", async (req, res) => {
         return res.status(500).json({ error: err.message });
       }
 
+});
+
+app.put("/api/poll/:id/vote", async (req, res) => {
+  const optionId = req.params.id;
+
+  try {
+    await runQuery(`
+      UPDATE Votes SET votes = votes + 1
+      WHERE id = ${optionId}
+    `);
+
+    return res.status(200).json({ message: 'Vote counted' });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
 });
 
 
