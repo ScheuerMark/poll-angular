@@ -6,7 +6,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "npm install concurrently --save && concurrently \"npm run serve-api\" \"npm run serve\"",
+    "start": "npm run serve-api && npm run serve",
     "serve": "cd angular-poll/ && npm start",
     "serve-api": "cd express-backend/ && npm start",
     "prebuild": "cd express-backend/ && npm run build",
