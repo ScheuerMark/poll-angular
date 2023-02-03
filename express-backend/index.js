@@ -6,11 +6,10 @@ const { v4 : uuid } = require("uuid");
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'scheuer',
-  host: 'dpg-cfe1knpmbjsrs6a8p7l0-a.frankfurt-postgres.render.com',
+  host: 'dpg-cfe1knpmbjsrs6a8p7l0-a',
   database: 'poll',
   password: 'dVVkn1ghdJUrMd5TN3hF8zYdXyNaTLfr',
   port: 5432,
-  ssl: true
 })
 const app = express();
 
