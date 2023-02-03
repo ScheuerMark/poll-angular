@@ -94,8 +94,7 @@ app.post("/api/new-poll", async (req, res) => {
 
 app.put("/api/poll/:id/vote", async (req, res) => {
   const optionId = req.params.id;
-  const ipAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-  console.log(ipAddress);
+  const ipAddress = req.headers['x-forwarded-for'].split(',')[0];
 
   try {
     const pollIdResult = await runQuery(`
