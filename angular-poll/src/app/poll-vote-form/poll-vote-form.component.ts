@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PollForm } from '../new-poll-form/pollform';
 import { PollService } from '../services/poll.service';
+import {Clipboard} from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-poll-vote-form',
@@ -16,6 +17,7 @@ export class PollVoteFormComponent implements OnInit {
     private pollService: PollService,
     private route: ActivatedRoute,
     private _router: Router,
+    private clipboard:Clipboard
     ) 
     {
       this.pollForm = {
@@ -45,5 +47,8 @@ export class PollVoteFormComponent implements OnInit {
         }
       }
     );
+  }
+  copyLink(){
+    this.clipboard.copy(window.location.href);
   }
 }

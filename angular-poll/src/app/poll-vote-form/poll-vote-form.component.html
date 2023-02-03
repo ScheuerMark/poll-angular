@@ -7,7 +7,10 @@
             <label [htmlFor]="option.id" [textContent]="option.value"></label>
             </div>
         </div>
+        <div class="button-row">
         <button (click)="sendVote()" class="poll-vote-btn poll-vote-btn-bg">Vote</button>
         <button [routerLink]="'/home/poll-result/'+pollForm.id" class="poll-result-btn poll-vote-btn">Results</button>
+        <button (click)="copyLink()" class="poll-result-btn poll-vote-btn">Copy link</button>
+        </div>
     </div>
 </div>

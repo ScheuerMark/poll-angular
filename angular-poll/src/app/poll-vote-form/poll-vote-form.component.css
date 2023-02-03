@@ -73,6 +73,7 @@
   vertical-align: middle;
   float: right;
   margin-top: 1rem;
+  max-width: 30%;
 }
 
 .poll-vote-btn:hover,
@@ -115,6 +116,9 @@ background: #fdcb77;
     background: #fdcb77;
     }
 
+.button-row{
+    width: 100%;
+}
 
   
 
