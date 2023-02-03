@@ -2,9 +2,10 @@
     <div class="vote-poll-container">
         <p class="poll-title" [textContent]="pollForm.title"></p>
         <div *ngFor="let option of pollForm.options; let i = index">
-            <div class="radiobtn">
-            <label [htmlFor]="option.id" [textContent]="option.value"></label>
-            <p class="vote-number" [textContent]="option.votes"></p>
+            <div class="radiobtn">        
+                    <label [htmlFor]="option.id" [textContent]="option.value"></label>
+                    <p class="vote-number" [textContent]="option.votes"></p>
+                    <div class="bar" [style.width]="((option.votes!) /allVotes )*100+'%'"></div>
             </div>
         </div>
     </div>

@@ -11,6 +11,7 @@ import { PollService } from '../services/poll.service';
 export class PollResultComponent implements OnInit {
   pollForm : PollForm;
   selectedOptionId: number = -1;
+  allVotes:number = 10;
 
   constructor(
     private pollService: PollService,
@@ -32,8 +33,12 @@ export class PollResultComponent implements OnInit {
     let id = this.route.snapshot.params['id'];
     this.pollService.getPoll(id).subscribe(poll => {
       this.pollForm = poll as PollForm;
+      this.allVotes=0;
+      this.pollForm.options.forEach(x => this.allVotes+= x.votes ??=0);
     });
+
   }
+
 
   sendVote(){
     this.pollService.increaseVote(this.selectedOptionId).subscribe(result =>

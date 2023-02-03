@@ -30,6 +30,14 @@
     max-width: 36.5rem;
     width: calc(100% - 1rem);
 }
+.bar{
+    background-color: rgba(16, 238, 16, 0.358);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .radiobtn label{
     font-size: 2rem;
     width: calc(100% - 1rem);
