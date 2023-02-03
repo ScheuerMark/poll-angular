@@ -37,7 +37,13 @@ export class PollVoteFormComponent implements OnInit {
   }
 
   sendVote(){
-    this.pollService.increaseVote(this.selectedOptionId).subscribe(result =>
-      this._router.navigate([`/home/poll-result/${this.pollForm.id}`]));
+    this.pollService.increaseVote(this.selectedOptionId).subscribe(
+      result => this._router.navigate([`/home/poll-result/${this.pollForm.id}`]),
+      error => {
+        if(error.status === 400){
+          alert("Already voted for this poll");
+        }
+      }
+    );
   }
 }
