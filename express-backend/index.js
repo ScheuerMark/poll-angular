@@ -104,7 +104,7 @@ app.put("/api/poll/:id/vote", async (req, res) => {
     const ipExistsResult = await runQuery(`
       SELECT COUNT(*) FROM IpAddresses WHERE poll_id = ${pollId} AND ip_address = '${ipAddress}'
     `);
-    const ipExists = ipExistsResult[0][""];
+    const ipExists = ipExistsResult[0].count;
 
     if (ipExists > 0) {
       return res.status(400).json({ error: 'This IP address has already voted for this poll' });
