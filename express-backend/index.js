@@ -6,10 +6,11 @@ const { v4 : uuid } = require("uuid");
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'scheuer',
-  host: 'dpg-cfe1knpmbjsrs6a8p7l0-a',
+  host: 'dpg-cfe1knpmbjsrs6a8p7l0-a.frankfurt-postgres.render.com',
   database: 'poll',
   password: 'dVVkn1ghdJUrMd5TN3hF8zYdXyNaTLfr',
   port: 5432,
+  ssl: true
 })
 const app = express();
 
@@ -93,7 +94,8 @@ app.post("/api/new-poll", async (req, res) => {
 
 app.put("/api/poll/:id/vote", async (req, res) => {
   const optionId = req.params.id;
-  const ipAddress = req.ip;
+  const ipAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  console.log(ipAddress);
 
   try {
     const pollIdResult = await runQuery(`
@@ -105,7 +107,7 @@ app.put("/api/poll/:id/vote", async (req, res) => {
       SELECT COUNT(*) FROM IpAddresses WHERE poll_id = ${pollId} AND ip_address = '${ipAddress}'
     `);
     const ipExists = ipExistsResult[0].count;
-
+    
     if (ipExists > 0) {
       return res.status(400).json({ error: 'This IP address has already voted for this poll' });
     } else {
