@@ -1,7 +1,7 @@
 <div class="create-poll-form">
     <div class="create-poll-container">
         <input type="text" placeholder="Title" class="poll-title"  [(ngModel)]="pollForm.title">
-        <div *ngFor="let option of pollForm.options; let i = index">
+        <div class="poll-row" *ngFor="let option of pollForm.options; let i = index">
             <input type="text" placeholder="Option" class="poll-element"
             [(ngModel)]="option.value">
             <a (click)="removeOption(i)" class="poll-remove-option">-</a>
